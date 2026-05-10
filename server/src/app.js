@@ -4,6 +4,8 @@ import morgan from 'morgan';
 
 // Import Routes
 import authRoutes from './routes/authroutes.js';
+import trackerRoutes from './routes/trackerroutes.js';
+import analyticsRoutes from './routes/analyticsroutes.js';
 
 const app = express();
 
@@ -16,7 +18,8 @@ app.use(morgan('dev'));
 // Routes
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/trackers', trackerRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running...');
