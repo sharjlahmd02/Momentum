@@ -40,14 +40,37 @@ const trackingEntrySchema = new mongoose.Schema(
 );
 
 
-// Ensure a user can only have one entry per tracker per date
+//
+// INDEXES
+//
 
-trackingEntrySchema.index({ tracker: 1, date: 1 }, { unique: true });
+// ONLY ONE ENTRY PER DAY
+trackingEntrySchema.index(
+  {
+    user: 1,
+    tracker: 1,
+    date: 1,
+  },
+  {
+    unique: true,
+  },
+);
 
+// HEATMAP & ANALYTICS
+trackingEntrySchema.index({
+  tracker: 1,
+  date: 1,
+});
+
+// USER HISTORY
+trackingEntrySchema.index({
+  user: 1,
+  createdAt: -1,
+});
 
 const TrackingEntry = mongoose.model(
-  'TrackingEntry',
-  trackingEntrySchema
+  "TrackingEntry",
+  trackingEntrySchema,
 );
 
 export default TrackingEntry;

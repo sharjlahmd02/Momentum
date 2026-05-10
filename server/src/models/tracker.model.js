@@ -78,4 +78,24 @@ const trackerSchema = new mongoose.Schema(
 
 const Tracker = mongoose.model('Tracker', trackerSchema);
 
+
+//
+// INDEXES
+//
+trackerSchema.index({
+  user: 1,
+  type: 1,
+});
+
+trackerSchema.index({
+  user: 1,
+  isArchived: 1,
+});
+
+trackerSchema.index({
+  user: 1,
+  createdAt: -1,
+});
+
+
 export default Tracker;
